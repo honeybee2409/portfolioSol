@@ -734,11 +734,6 @@ body {
     .about-me .about-image img {
         max-width: 250px;
     }
-    /*
-    .gallery-tabs {
-        gap: 10px;
-    }
-    */
     .tab-button {
         padding: 10px 20px;
         font-size: 0.9em;
@@ -819,28 +814,29 @@ body {
     }
     /* FIM DAS ALTERAÇÕES NA SEÇÃO DE HABILIDADES */
 
-    /* NOVAS ALTERAÇÕES AQUI para a reorganização das abas da galeria */
+    /* NOVAS ALTERAÇÕES AQUI para o tamanho das abas da galeria */
     .gallery-tabs {
-        flex-direction: row; /* Volta a ser row para a organização 3x3x1 */
-        flex-wrap: wrap; /* Essencial para quebrar as linhas */
-        justify-content: center; /* Centraliza os botões */
-        gap: 10px; /* Espaçamento entre os botões */
-        max-width: 500px; /* Limita a largura para garantir 3 por linha em telas um pouco maiores dentro da media query */
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px; /* Aumentei o gap para dar mais espaço, se necessário */
+        max-width: 700px; /* Aumentei o max-width do container para permitir botões maiores */
         margin-left: auto;
         margin-right: auto;
     }
 
     .tab-button {
-        flex-basis: calc(33.33% - 15px); /* Ajusta a largura para 3 por linha, considerando o gap. */
-        /* calc(100% / 3 - gap_total_entre_itens / numero_de_itens) */
-        max-width: 150px; /* Define uma largura máxima para que não fiquem muito grandes */
-        white-space: nowrap; /* Evita que o texto quebre dentro do botão */
-        overflow: hidden; /* Esconde o texto que transborda */
-        text-overflow: ellipsis; /* Adiciona "..." ao texto que transborda */
-        text-align: center;
-        box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+        /* Calcule a largura para que 3 botões caibam confortavelmente */
+        flex-basis: calc(33.33% - 20px); /* Ajustado para um gap de 15px, deixando 5px de folga por botão */
+        width: auto; /* Deixa o flex-basis ditar a largura */
+        min-width: 150px; /* Garante uma largura mínima para o botão */
+        padding: 15px 10px; /* Aumenta o padding para um visual maior */
+        font-size: 1em; /* Aumenta o tamanho da fonte para leitura */
+        white-space: normal; /* Permite que o texto quebre em várias linhas se for muito longo */
+        height: auto; /* Permite que a altura do botão se ajuste ao conteúdo */
+        text-overflow: clip; /* Remove os "..." para permitir o texto completo com quebra de linha */
     }
-    /* FIM DAS NOVAS ALTERAÇÕES NA REORGANIZAÇÃO DAS ABAS DA GALERIA */
+    /* FIM DAS NOVAS ALTERAÇÕES NO TAMANHO DAS ABAS DA GALERIA */
 
     /* Alterações para a seção MINHA ARTE (galeria de imagens - já feita) */
     .art-grid {
@@ -892,10 +888,6 @@ body {
         margin: 0 auto;
         max-width: 400px;
     }
-    /* .gallery-tabs { -- Já alterado acima */
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* } */
     .modal-content {
         max-width: 95%;
         max-height: 95vh;
@@ -982,9 +974,15 @@ body {
 
     /* Ajuste para as abas da galeria em telas muito pequenas */
     .gallery-tabs {
-        /* Para telas muito pequenas, pode ser necessário voltar para 2 ou 1 por linha,
-           ou deixar 3 por linha mas com botões menores */
-        flex-basis: calc(50% - 10px); /* Exemplo: 2 por linha */
-        max-width: 180px; /* Limita a largura do botão para caber 2 por linha */
+        gap: 10px; /* Pode reduzir o gap se necessário */
+        /* Aqui vamos garantir 2 botões por linha para melhor legibilidade */
+        max-width: 400px; /* Limita o container para ajudar na organização de 2 por linha */
+    }
+
+    .tab-button {
+        flex-basis: calc(50% - 10px); /* Para 2 botões por linha */
+        min-width: 120px; /* Garante que os botões não fiquem minúsculos */
+        padding: 12px 8px; /* Ajusta o padding para telas menores */
+        font-size: 0.9em; /* Reduz a fonte ligeiramente para caber, mas mantendo a legibilidade */
     }
 }
