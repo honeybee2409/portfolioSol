@@ -380,7 +380,7 @@ body {
 /* Estilos para as abas de categoria */
 .gallery-tabs {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
     justify-content: center;
     margin-bottom: 40px;
     gap: 15px;
@@ -734,9 +734,11 @@ body {
     .about-me .about-image img {
         max-width: 250px;
     }
+    /*
     .gallery-tabs {
         gap: 10px;
     }
+    */
     .tab-button {
         padding: 10px 20px;
         font-size: 0.9em;
@@ -748,11 +750,6 @@ body {
     .testimonials-grid {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     }
-    /*
-    .art-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-    */
     .art-item {
         height: 380px; /* Altura ajustada para responsividade */
     }
@@ -793,7 +790,7 @@ body {
         margin-bottom: 40px;
     }
 
-    /* ALTERAÇÕES PARA A SEÇÃO DE HABILIDADES (já feitas) */
+    /* ALTERAÇÕES PARA A SEÇÃO DE HABILIDADES */
     .skills-grid {
         display: flex;
         overflow-x: auto;
@@ -822,66 +819,83 @@ body {
     }
     /* FIM DAS ALTERAÇÕES NA SEÇÃO DE HABILIDADES */
 
-    /* NOVAS ALTERAÇÕES AQUI para a seção MINHA ARTE (galeria) */
-    .art-grid {
-        display: flex; /* Muda para flexbox para rolagem horizontal */
-        overflow-x: auto; /* Permite rolagem horizontal */
-        -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
-        scroll-snap-type: x mandatory; /* Ajuda a "encaixar" os itens ao rolar */
-        justify-content: initial; /* Remove centralização para permitir rolagem */
-        max-width: 100%; /* Permite que o container se estenda para a rolagem */
-        padding-bottom: 20px; /* Adiciona um pequeno padding para a barra de rolagem (se visível) */
-        padding-left: 20px; /* Adiciona padding no início da rolagem */
-        padding-right: 20px; /* Adiciona padding no final da rolagem */
-        margin: 0; /* Remove margens automáticas para permitir rolagem de ponta a ponta */
-        gap: 20px; /* Reduz o espaçamento entre os itens em telas menores */
+    /* NOVAS ALTERAÇÕES AQUI para a reorganização das abas da galeria */
+    .gallery-tabs {
+        flex-direction: row; /* Volta a ser row para a organização 3x3x1 */
+        flex-wrap: wrap; /* Essencial para quebrar as linhas */
+        justify-content: center; /* Centraliza os botões */
+        gap: 10px; /* Espaçamento entre os botões */
+        max-width: 500px; /* Limita a largura para garantir 3 por linha em telas um pouco maiores dentro da media query */
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    /* Opcional: Estilos para esconder a barra de rolagem (para um visual mais limpo) */
+    .tab-button {
+        flex-basis: calc(33.33% - 15px); /* Ajusta a largura para 3 por linha, considerando o gap. */
+        /* calc(100% / 3 - gap_total_entre_itens / numero_de_itens) */
+        max-width: 150px; /* Define uma largura máxima para que não fiquem muito grandes */
+        white-space: nowrap; /* Evita que o texto quebre dentro do botão */
+        overflow: hidden; /* Esconde o texto que transborda */
+        text-overflow: ellipsis; /* Adiciona "..." ao texto que transborda */
+        text-align: center;
+        box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+    }
+    /* FIM DAS NOVAS ALTERAÇÕES NA REORGANIZAÇÃO DAS ABAS DA GALERIA */
+
+    /* Alterações para a seção MINHA ARTE (galeria de imagens - já feita) */
+    .art-grid {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        justify-content: initial;
+        max-width: 100%;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 0;
+        gap: 20px;
+    }
     .art-grid::-webkit-scrollbar {
-        height: 0; /* Para navegadores WebKit (Chrome, Safari) */
+        height: 0;
     }
     .art-grid {
-        -ms-overflow-style: none;  /* Para IE e Edge */
-        scrollbar-width: none;  /* Para Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
-
     .art-item {
-        flex-shrink: 0; /* Evita que os itens encolham */
-        width: 280px; /* Largura fixa para cada item na rolagem. Ajuste conforme necessário. */
-        height: 380px; /* Mantém a altura ajustada para responsividade */
-        scroll-snap-align: start; /* Ajuda o item a se alinhar ao início ao rolar */
-        margin: 0; /* Remove margens que podem atrapalhar a rolagem */
+        flex-shrink: 0;
+        width: 280px;
+        height: 380px;
+        scroll-snap-align: start;
+        margin: 0;
     }
-
     .art-item img {
-        height: 200px; /* Ajusta a altura da imagem para se adequar à nova altura do item e dar espaço ao texto */
+        height: 200px;
     }
-
     .art-info h3 {
-        font-size: 1.2em; /* Ajusta o tamanho do título da arte */
+        font-size: 1.2em;
     }
     .art-info p {
-        font-size: 0.8em; /* Ajusta o tamanho da descrição da arte */
+        font-size: 0.8em;
     }
-    /* FIM DAS NOVAS ALTERAÇÕES NA SEÇÃO MINHA ARTE */
+    /* FIM DAS ALTERAÇÕES NA SEÇÃO MINHA ARTE (galeria de imagens) */
 
 
     .experience-grid,
-    /* .skills-grid, -- Já alterado acima */
     .projects-grid,
     .testimonials-grid {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-    .experience-item, /* .skill-category, -- Já alterado acima */ .art-item, .project-item, .testimonial-item {
+    .experience-item, .art-item, .project-item, .testimonial-item {
         margin: 0 auto;
         max-width: 400px;
     }
-    .gallery-tabs {
-        flex-direction: column;
-        align-items: center;
-    }
+    /* .gallery-tabs { -- Já alterado acima */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* } */
     .modal-content {
         max-width: 95%;
         max-height: 95vh;
@@ -954,15 +968,23 @@ body {
         padding: 25px;
     }
 
-    /* Ajustes finos para habilidades em telas muito pequenas */
+    /* Ajustes finos para habilidades e arte em telas muito pequenas */
     .skills-grid,
-    .art-grid { /* Aplica os mesmos ajustes a art-grid */
+    .art-grid {
         padding-left: 15px;
         padding-right: 15px;
         gap: 15px;
     }
     .skill-category,
-    .art-item { /* Aplica os mesmos ajustes a art-item */
+    .art-item {
         width: 280px;
+    }
+
+    /* Ajuste para as abas da galeria em telas muito pequenas */
+    .gallery-tabs {
+        /* Para telas muito pequenas, pode ser necessário voltar para 2 ou 1 por linha,
+           ou deixar 3 por linha mas com botões menores */
+        flex-basis: calc(50% - 10px); /* Exemplo: 2 por linha */
+        max-width: 180px; /* Limita a largura do botão para caber 2 por linha */
     }
 }
