@@ -320,7 +320,7 @@ body {
 
 /* Habilidades */
 .skills-grid {
-    display: grid;
+    display: grid; /* Padrão para telas maiores */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
     justify-content: center;
@@ -790,8 +790,42 @@ body {
         font-size: 2em;
         margin-bottom: 40px;
     }
+
+    /* ALTERAÇÕES AQUI para a seção de Habilidades */
+    .skills-grid {
+        display: flex; /* Muda para flexbox para rolagem horizontal */
+        overflow-x: auto; /* Permite rolagem horizontal */
+        -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
+        scroll-snap-type: x mandatory; /* Ajuda a "encaixar" os itens ao rolar */
+        justify-content: initial; /* Remove centralização para permitir rolagem */
+        max-width: 100%; /* Permite que o container se estenda para a rolagem */
+        padding-bottom: 20px; /* Adiciona um pequeno padding para a barra de rolagem (se visível) */
+        padding-left: 20px; /* Adiciona padding no início da rolagem */
+        padding-right: 20px; /* Adiciona padding no final da rolagem */
+        margin: 0; /* Remove margens automáticas para permitir rolagem de ponta a ponta */
+        gap: 20px; /* Reduz o espaçamento entre os itens em telas menores */
+    }
+
+    /* Opcional: Estilos para esconder a barra de rolagem (para um visual mais limpo) */
+    .skills-grid::-webkit-scrollbar {
+        height: 0; /* Para navegadores WebKit (Chrome, Safari) */
+    }
+    .skills-grid {
+        -ms-overflow-style: none;  /* Para IE e Edge */
+        scrollbar-width: none;  /* Para Firefox */
+    }
+
+
+    .skill-category {
+        flex-shrink: 0; /* Evita que os itens encolham */
+        width: 300px; /* Largura fixa para cada item na rolagem */
+        scroll-snap-align: start; /* Ajuda o item a se alinhar ao início ao rolar */
+        margin: 0; /* Remove margens que podem atrapalhar a rolagem */
+    }
+    /* FIM DAS ALTERAÇÕES NA SEÇÃO DE HABILIDADES */
+
+
     .experience-grid,
-    .skills-grid,
     .art-grid,
     .projects-grid,
     .testimonials-grid {
@@ -876,5 +910,15 @@ body {
     }
     .testimonial-item {
         padding: 25px;
+    }
+
+    /* Ajustes finos para habilidades em telas muito pequenas */
+    .skills-grid {
+        padding-left: 15px; /* Ajusta padding para telas menores */
+        padding-right: 15px; /* Ajusta padding para telas menores */
+        gap: 15px; /* Reduz ainda mais o gap */
+    }
+    .skill-category {
+        width: 280px; /* Garante que o cartão seja um pouco menor em telas muito pequenas */
     }
 }
