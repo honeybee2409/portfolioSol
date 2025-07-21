@@ -418,7 +418,7 @@ body {
 }
 
 .art-grid {
-    display: grid;
+    display: grid; /* Padrão para telas maiores */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     transition: opacity 0.5s ease-in-out;
@@ -748,9 +748,11 @@ body {
     .testimonials-grid {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     }
+    /*
     .art-grid {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
+    */
     .art-item {
         height: 380px; /* Altura ajustada para responsividade */
     }
@@ -791,8 +793,37 @@ body {
         margin-bottom: 40px;
     }
 
-    /* ALTERAÇÕES AQUI para a seção de Habilidades */
+    /* ALTERAÇÕES PARA A SEÇÃO DE HABILIDADES (já feitas) */
     .skills-grid {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        justify-content: initial;
+        max-width: 100%;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 0;
+        gap: 20px;
+    }
+    .skills-grid::-webkit-scrollbar {
+        height: 0;
+    }
+    .skills-grid {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .skill-category {
+        flex-shrink: 0;
+        width: 300px;
+        scroll-snap-align: start;
+        margin: 0;
+    }
+    /* FIM DAS ALTERAÇÕES NA SEÇÃO DE HABILIDADES */
+
+    /* NOVAS ALTERAÇÕES AQUI para a seção MINHA ARTE (galeria) */
+    .art-grid {
         display: flex; /* Muda para flexbox para rolagem horizontal */
         overflow-x: auto; /* Permite rolagem horizontal */
         -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
@@ -807,32 +838,43 @@ body {
     }
 
     /* Opcional: Estilos para esconder a barra de rolagem (para um visual mais limpo) */
-    .skills-grid::-webkit-scrollbar {
+    .art-grid::-webkit-scrollbar {
         height: 0; /* Para navegadores WebKit (Chrome, Safari) */
     }
-    .skills-grid {
+    .art-grid {
         -ms-overflow-style: none;  /* Para IE e Edge */
         scrollbar-width: none;  /* Para Firefox */
     }
 
-
-    .skill-category {
+    .art-item {
         flex-shrink: 0; /* Evita que os itens encolham */
-        width: 300px; /* Largura fixa para cada item na rolagem */
+        width: 280px; /* Largura fixa para cada item na rolagem. Ajuste conforme necessário. */
+        height: 380px; /* Mantém a altura ajustada para responsividade */
         scroll-snap-align: start; /* Ajuda o item a se alinhar ao início ao rolar */
         margin: 0; /* Remove margens que podem atrapalhar a rolagem */
     }
-    /* FIM DAS ALTERAÇÕES NA SEÇÃO DE HABILIDADES */
+
+    .art-item img {
+        height: 200px; /* Ajusta a altura da imagem para se adequar à nova altura do item e dar espaço ao texto */
+    }
+
+    .art-info h3 {
+        font-size: 1.2em; /* Ajusta o tamanho do título da arte */
+    }
+    .art-info p {
+        font-size: 0.8em; /* Ajusta o tamanho da descrição da arte */
+    }
+    /* FIM DAS NOVAS ALTERAÇÕES NA SEÇÃO MINHA ARTE */
 
 
     .experience-grid,
-    .art-grid,
+    /* .skills-grid, -- Já alterado acima */
     .projects-grid,
     .testimonials-grid {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-    .experience-item, .skill-category, .art-item, .project-item, .testimonial-item {
+    .experience-item, /* .skill-category, -- Já alterado acima */ .art-item, .project-item, .testimonial-item {
         margin: 0 auto;
         max-width: 400px;
     }
@@ -913,12 +955,14 @@ body {
     }
 
     /* Ajustes finos para habilidades em telas muito pequenas */
-    .skills-grid {
-        padding-left: 15px; /* Ajusta padding para telas menores */
-        padding-right: 15px; /* Ajusta padding para telas menores */
-        gap: 15px; /* Reduz ainda mais o gap */
+    .skills-grid,
+    .art-grid { /* Aplica os mesmos ajustes a art-grid */
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 15px;
     }
-    .skill-category {
-        width: 280px; /* Garante que o cartão seja um pouco menor em telas muito pequenas */
+    .skill-category,
+    .art-item { /* Aplica os mesmos ajustes a art-item */
+        width: 280px;
     }
 }
